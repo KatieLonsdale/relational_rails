@@ -3,7 +3,7 @@ class CarsController < ApplicationController
     @cars = Car.all
   end
 
-  # def show
-  #   @car = Car.find(params[:id])
-  # end
+  def show
+    @car = Car.find(params[:id])
+  end
 end
