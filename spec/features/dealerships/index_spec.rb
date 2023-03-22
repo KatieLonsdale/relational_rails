@@ -1,11 +1,5 @@
 require 'rails_helper'
 
-# For each parent table
-# As a visitor
-# When I visit '/dealerships'
-# Then I see the name of each parent record in the system
-
-
 RSpec.describe "/dealerships", type: :feature do
   describe "as a visitor, when I visit the dealership index page" do
     it "should display the name of each dealerships" do
@@ -19,5 +13,4 @@ RSpec.describe "/dealerships", type: :feature do
       expect(page).to have_content(dealership_3.name)
     end
   end
-
 end
