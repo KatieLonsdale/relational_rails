@@ -12,8 +12,6 @@ RSpec.describe "/cars", type: :feature do
       car_3 = Car.create!(make: 'Porsche', model: '911', awd: false, mileage: 160234, dealership_id: dealership_3.id)
       visit "/cars"
 
-      save_and_open_page
-
       expect(page).to have_content(car_1.make)
       expect(page).to have_content(car_1.model)
       expect(page).to have_content(car_1.awd)
