@@ -1,0 +1,5 @@
+<% @dealership.list_cars.each do |car| %>
+  <h3><%= "#{car.make} #{car.model}" %></h3>
+  <p>AWD? <%= car.awd %></p>
+  <p>Mileage: <%= car.mileage %></p>
+<% end %>
