@@ -17,23 +17,26 @@ RSpec.describe "/cars/:id", type: :feature do
       car_1 = Car.create!(make: 'Toyota', model: 'Corolla', awd: false, mileage: 30200, dealership_id: dealership_1.id)
       car_2 = Car.create!(make: 'Nissan', model: 'Rogue', awd: true, mileage: 46414, dealership_id: dealership_2.id)
       car_3 = Car.create!(make: 'Porsche', model: '911', awd: false, mileage: 160234, dealership_id: dealership_3.id)
-      visit "/cars/car_1.id"
-      save_and_open_page
+      visit "/cars/#{car_1.id}"
 
       expect(page).to have_content(car_1.make)
       expect(page).to have_content(car_1.model)
       expect(page).to have_content(car_1.awd)
       expect(page).to have_content(car_1.mileage)
 
-      # expect(page).to have_content(car_2.make)
-      # expect(page).to have_content(car_2.model)
-      # expect(page).to have_content(car_2.awd)
-      # expect(page).to have_content(car_2.mileage)
+      visit "/cars/#{car_2.id}"
 
-      # expect(page).to have_content(car_3.make)
-      # expect(page).to have_content(car_3.model)
-      # expect(page).to have_content(car_3.awd)
-      # expect(page).to have_content(car_3.mileage)
+      expect(page).to have_content(car_2.make)
+      expect(page).to have_content(car_2.model)
+      expect(page).to have_content(car_2.awd)
+      expect(page).to have_content(car_2.mileage)
+
+      visit "/cars/#{car_3.id}"
+
+      expect(page).to have_content(car_3.make)
+      expect(page).to have_content(car_3.model)
+      expect(page).to have_content(car_3.awd)
+      expect(page).to have_content(car_3.mileage)
     end
   end
 end
