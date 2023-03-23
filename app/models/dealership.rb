@@ -4,4 +4,8 @@ class Dealership < ApplicationRecord
   def list_cars
     cars.each{|car| car}
   end
+
+  def count_of_cars
+    cars.count
+  end
 end
