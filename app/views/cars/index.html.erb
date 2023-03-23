@@ -1,3 +1,5 @@
+<%= link_to "Click here to view all cars.", "/cars" %>
+
 <% @cars.each do |car| %>
 <h3><%= "#{car.make} #{car.model}" %></h3>
 <p>AWD: <%= car.awd %></p>
