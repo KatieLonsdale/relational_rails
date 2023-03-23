@@ -27,5 +27,14 @@ RSpec.describe "/cars", type: :feature do
       expect(page).to have_content(car_3.awd)
       expect(page).to have_content(car_3.mileage)
     end
+
+    it 'should have a link to the child index at the top' do
+      visit "/cars"
+
+      expect(page).to have_content("Click here to view all cars.")
+      click_link "Click here to view all cars."
+
+      expect(current_url).to eq("http://www.example.com/cars")
+    end
   end
 end
