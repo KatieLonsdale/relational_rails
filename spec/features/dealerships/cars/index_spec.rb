@@ -1,8 +1,3 @@
-# As a visitor
-# When I visit '/parents/:parent_id/child_table_name'
-# Then I see each Child that is associated with that Parent with each Child's attributes
-# (data from each column that is on the child table)
-
 require 'rails_helper'
 
 RSpec.describe "/dealerships/:id/cars", type: :feature do
@@ -40,6 +35,17 @@ RSpec.describe "/dealerships/:id/cars", type: :feature do
       expect(page).to have_content(car_5.model)
       expect(page).to have_content(car_5.awd)
       expect(page).to have_content(car_5.mileage)
+    end
+
+    it 'should have a link to the cars index at the top' do
+      dealership_1 = Dealership.create!(name: "Mountain States Toyota", financing_available: true, employees: 100)
+      car_1 = Car.create!(make: 'Toyota', model: 'Corolla', awd: false, mileage: 30200, dealership_id: dealership_1.id)
+      visit "/dealerships/#{dealership_1.id}/cars"
+
+      expect(page).to have_content("Click here to view all cars.")
+      click_link "Click here to view all cars."
+
+      expect(current_url).to eq("http://www.example.com/cars")
     end
   end
 end

@@ -27,5 +27,15 @@ RSpec.describe "/dealership/:id", type: :feature do
       visit "/dealerships/#{@dealership_2.id}"
       expect(page).to have_content("3 cars available")
     end
+
+    it 'should have a link to the child index at the top' do
+      @dealership_1 = Dealership.create!(name: "Mountain States Toyota", financing_available: true, employees: 100)
+      visit "/dealerships/#{@dealership_1.id}"
+
+      expect(page).to have_content("Click here to view all cars.")
+      click_link("Click here to view all cars.")
+
+      expect(current_url).to eq("http://www.example.com/cars")
+    end
   end
 end
