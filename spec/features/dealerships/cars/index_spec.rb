@@ -58,5 +58,14 @@ RSpec.describe "/dealerships/:id/cars", type: :feature do
 
       expect(current_url).to eq("http://www.example.com/dealerships")
     end
+
+    it 'should have a link to add a new car for that dealership' do
+      dealership_1 = Dealership.create!(name: "Mountain States Toyota", financing_available: true, employees: 100)
+      visit "/dealerships/#{dealership_1.id}/cars"
+      expect(page).to have_content("Add a new car.")
+      click_link "Add a new car."
+
+      expect(current_url).to eq("http://www.example.com/dealerships/#{dealership_1.id}/cars/new")
+    end
   end
 end

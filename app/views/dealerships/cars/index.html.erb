@@ -3,3 +3,5 @@
   <p>AWD? <%= car.awd %></p>
   <p>Mileage: <%= car.mileage %></p>
 <% end %>
+
+<p><%= link_to "Add a new car.", "/dealerships/#{@dealership.id}/cars/new" %></p>

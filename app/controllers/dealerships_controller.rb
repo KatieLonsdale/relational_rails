@@ -34,5 +34,4 @@ class DealershipsController < ApplicationController
     dealership.save
     redirect_to "/dealerships/#{dealership.id}"
   end
-
 end
