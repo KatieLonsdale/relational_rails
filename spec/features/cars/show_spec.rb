@@ -1,12 +1,5 @@
 require 'rails_helper'
 
-# User Story 4, Child Show 
-
-# As a visitor
-# When I visit '/child_table_name/:id'
-# Then I see the child with that id including the child's attributes
-# (data from each column that is on the child table)
-
 RSpec.describe "/cars/:id", type: :feature do
   describe "as a visitor, when I visit the car show page" do
     it "should display car with that id and its attributes" do
