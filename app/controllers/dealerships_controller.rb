@@ -6,4 +6,17 @@ class DealershipsController < ApplicationController
   def show
     @dealership = Dealership.find(params[:id])
   end
+
+  def new
+    
+  end
+
+  # def create
+  #   dealership = Dealership.new({
+  #     title: params[:task][:title],
+  #     description: params[:task][:description]
+  #   })
+  #   task.save
+  #   redirect_to '/tasks'
+  # end
 end
