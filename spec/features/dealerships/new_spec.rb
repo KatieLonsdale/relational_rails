@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe '/dealerships/new' do
   describe "as a visitor, when I arrive at the create new dealership page" do
-    it 'can create a new artist' do
+    it 'can create a new dealership' do
       visit '/dealerships/new'
 
       fill_in(:name, with: 'County Line Auto')
