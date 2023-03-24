@@ -11,12 +11,13 @@ class DealershipsController < ApplicationController
     
   end
 
-  # def create
-  #   dealership = Dealership.new({
-  #     title: params[:task][:title],
-  #     description: params[:task][:description]
-  #   })
-  #   task.save
-  #   redirect_to '/tasks'
-  # end
+  def create
+    dealership = Dealership.new({
+      name: params[:name],
+      financing_available: params[:financing_available],
+      employees: params[:employees]
+    })
+    dealership.save
+    redirect_to '/dealerships'
+  end
 end
