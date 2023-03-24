@@ -1,0 +1,10 @@
+<%= form_with url: '/dealerships', method: :post, local: true do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <%= form.label :financing_available %>
+  <input name="boolean-parameter" type="checkbox" value="true" />
+  <input name="boolean-parameter" type="hidden" value="false" />
+  <%= form.label :employees %>
+  <%= form.text_field :employees %>
+  <%= form.submit "Create Dealership" %>
+<% end %>
