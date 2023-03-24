@@ -8,7 +8,6 @@ class DealershipsController < ApplicationController
   end
 
   def new
-    
   end
 
   def create
@@ -20,4 +19,20 @@ class DealershipsController < ApplicationController
     dealership.save
     redirect_to '/dealerships'
   end
+
+  def edit
+    @dealership=Dealership.find(params[:dealership_id])
+  end
+
+  def update
+    dealership = Dealership.find(params[:dealership_id])
+    dealership.update({
+    name: params[:name],
+    financing_available: params[:financing_available],
+    employees: params[:employees]
+    })
+    dealership.save
+    redirect_to "/dealerships/#{dealership.id}"
+  end
+
 end
