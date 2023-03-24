@@ -1,0 +1,9 @@
+<%= form_with url: "/dealerships/#{@dealership.id}", method: :patch, local: true do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %><br>
+  <%= form.label :financing_available %>
+  <%= form.text_field :financing_available %><br>
+  <%= form.label :employees %>
+  <%= form.text_field :employees %><br>
+  <%= form.submit "Edit Dealership" %>
+<% end %>
