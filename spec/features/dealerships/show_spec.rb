@@ -57,5 +57,17 @@ RSpec.describe "/dealership/:id", type: :feature do
       click_link "Click here to view this dealership's inventory."
       expect(current_url).to eq("http://www.example.com/dealerships/#{@dealership_2.id}/cars")
     end
+
+    it 'has a link to update the dealership' do
+      visit "/dealerships/#{@dealership_1.id}"
+      expect(page).to have_content("Update Dealership.")
+      click_link "Update Dealership."
+      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealership_1.id}/edit")
+
+      visit "/dealerships/#{@dealership_2.id}"
+      expect(page).to have_content("Update Dealership.")
+      click_link "Update Dealership."
+      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealership_2.id}/edit")
+    end
   end
 end
