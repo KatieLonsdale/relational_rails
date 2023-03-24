@@ -29,7 +29,6 @@ RSpec.describe "/dealership/:id", type: :feature do
     end
 
     it 'should have a link to the child index at the top' do
-      @dealership_1 = Dealership.create!(name: "Mountain States Toyota", financing_available: true, employees: 100)
       visit "/dealerships/#{@dealership_1.id}"
 
       expect(page).to have_content("Click here to view all cars.")
@@ -39,13 +38,24 @@ RSpec.describe "/dealership/:id", type: :feature do
     end
 
     it 'should have a link to the dealerships index at the top' do
-      @dealership_1 = Dealership.create!(name: "Mountain States Toyota", financing_available: true, employees: 100)
       visit "/dealerships/#{@dealership_1.id}"
 
       expect(page).to have_content("Click here to view all dealerships.")
       click_link "Click here to view all dealerships."
 
       expect(current_url).to eq("http://www.example.com/dealerships")
+    end
+
+    it 'should have a link to the index of cars that belong to dealership' do
+      visit "/dealerships/#{@dealership_1.id}"
+      expect(page).to have_content("Click here to view this dealership's inventory.")
+      click_link "Click here to view this dealership's inventory."
+      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealership_1.id}/cars")
+
+      visit "/dealerships/#{@dealership_2.id}"
+      expect(page).to have_content("Click here to view this dealership's inventory.")
+      click_link "Click here to view this dealership's inventory."
+      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealership_2.id}/cars")
     end
   end
 end
