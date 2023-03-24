@@ -3,10 +3,12 @@ Rails.application.routes.draw do
   get '/dealerships', to: 'dealerships#index'
   get 'dealerships/new', to: 'dealerships#new'
   get 'dealerships/:dealership_id/edit', to: 'dealerships#edit'
+  get 'dealerships/:dealership_id/cars/new', to: 'dealerships/cars#new'
   get '/cars', to: 'cars#index'
   get '/dealerships/:dealership_id/cars', to: 'dealerships/cars#index'
   get '/cars/:id', to: 'cars#show'
   get '/dealerships/:id', to: 'dealerships#show'
   post '/dealerships', to: 'dealerships#create'
+  post '/dealerships/:dealership_id/cars', to: 'dealerships/cars#create'
   patch '/dealerships/:dealership_id', to: 'dealerships#update'
 end
