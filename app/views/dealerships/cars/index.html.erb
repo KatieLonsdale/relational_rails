@@ -1,7 +1,9 @@
-<% @dealership.list_cars.each do |car| %>
-  <h3><%= "#{car.make} #{car.model}" %></h3>
-  <p>AWD? <%= car.awd %></p>
-  <p>Mileage: <%= car.mileage %></p>
-<% end %>
+  <% @cars.each do |car| %>
+    <h3><%= "#{car.make} #{car.model}" %></h3>
+    <p>AWD? <%= car.awd %></p>
+    <p>Mileage: <%= car.mileage %></p>
+  <% end %>  
 
-<p><%= link_to "Add a new car.", "/dealerships/#{@dealership.id}/cars/new" %></p>
+<p><%= link_to "Add a new car.", "/dealerships/#{@dealership.id}/cars/new" %></p><br>
+
+<p><%= link_to "Sort in alphabetical order.", "/dealerships/#{@dealership.id}/cars?sort=alphabetically" %></p><br>
