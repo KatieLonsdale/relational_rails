@@ -2,10 +2,11 @@ class Dealership < ApplicationRecord
   has_many :cars
 
   def list_cars(params)
+    dealership_cars = Car.where(dealership_id: id)
     if params[:sort] == "alphabetically"
-      @cars = Car.sort_alphabetically
+      @cars = dealership_cars.sort_alphabetically
     else
-      @cars = Car.all
+      @cars = dealership_cars.all
     end
   end
 
