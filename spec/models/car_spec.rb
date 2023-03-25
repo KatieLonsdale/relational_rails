@@ -17,12 +17,16 @@ RSpec.describe Car, type: :model do
     end
     describe '::cars_with_awd' do
       it 'returns an array of cars with awd' do
-        assert(Car.cars_with_awd, [@car2, @car_4])
+        results = Car.cars_with_awd
+        expected = [@car_2, @car_4, @car_5]
+        assert_equal(results, expected)
       end
     end
     describe '::sort_alphabetically' do
       it 'returns an array of cars sorted by alphabetical order' do
-        assert(Car.sort_alphabetically, [@car_5,@car_2,@car_3,@car_1,@car_4])
+        results = Car.sort_alphabetically
+        expected = [@car_5,@car_2,@car_3,@car_1,@car_4]
+        assert_equal(results, expected)
       end
     end
   end
