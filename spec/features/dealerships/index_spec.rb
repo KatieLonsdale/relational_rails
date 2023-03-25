@@ -26,24 +26,30 @@ RSpec.describe "/dealerships", type: :feature do
     end
 
     it 'should have a link to the cars index at the top' do
-      expect(page).to have_content("Click here to view all cars.")
+      expect(page).to have_link("Click here to view all cars.")
       click_link("Click here to view all cars.")
 
       expect(current_url).to eq("http://www.example.com/cars")
     end
 
     it 'should have a link to the dealerships index at the top' do
-      expect(page).to have_content("Click here to view all dealerships.")
+      expect(page).to have_link("Click here to view all dealerships.")
       click_link "Click here to view all dealerships."
 
       expect(current_url).to eq("http://www.example.com/dealerships")
     end
 
     it 'should have a link to a page where you can create a dealership' do
-      expect(page).to have_content("New dealership.")
+      expect(page).to have_link("New dealership.")
       click_link "New dealership."
 
       expect(current_url).to eq("http://www.example.com/dealerships/new")
     end
   end
 end
+
+# As a visitor
+# When I visit the parent index page
+# Next to every parent, I see a link to edit that parent's info
+# When I click the link
+# I should be taken to that parent's edit page where I can update its information just like in User Story 12
