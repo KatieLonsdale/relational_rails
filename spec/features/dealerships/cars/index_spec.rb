@@ -52,7 +52,7 @@ RSpec.describe "/dealerships/:id/cars", type: :feature do
     it 'should have a link to the cars index at the top' do
       visit "/dealerships/#{@dealership_1.id}/cars"
 
-      expect(page).to have_content("Click here to view all cars.")
+      expect(page).to have_link("Click here to view all cars.")
       click_link "Click here to view all cars."
 
       expect(current_url).to eq("http://www.example.com/cars")
@@ -61,7 +61,7 @@ RSpec.describe "/dealerships/:id/cars", type: :feature do
     it 'should have a link to the dealerships index at the top' do
       visit "/dealerships/#{@dealership_1.id}/cars"
 
-      expect(page).to have_content("Click here to view all dealerships.")
+      expect(page).to have_link("Click here to view all dealerships.")
       click_link "Click here to view all dealerships."
 
       expect(current_url).to eq("http://www.example.com/dealerships")
@@ -69,7 +69,7 @@ RSpec.describe "/dealerships/:id/cars", type: :feature do
 
     it 'should have a link to add a new car for that dealership' do
       visit "/dealerships/#{@dealership_1.id}/cars"
-      expect(page).to have_content("Add a new car.")
+      expect(page).to have_link("Add a new car.")
       click_link "Add a new car."
 
       expect(current_url).to eq("http://www.example.com/dealerships/#{@dealership_1.id}/cars/new")
@@ -77,7 +77,7 @@ RSpec.describe "/dealerships/:id/cars", type: :feature do
 
     it 'should have a link to sort cars in alphabetical order' do
       visit "/dealerships/#{@dealership_2.id}/cars"
-      expect(page).to have_content("Sort in alphabetical order.")
+      expect(page).to have_link("Sort in alphabetical order.")
       click_link "Sort in alphabetical order."
 
       expect(current_path).to eq("/dealerships/#{@dealership_2.id}/cars")
