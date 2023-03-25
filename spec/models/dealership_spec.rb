@@ -16,17 +16,33 @@ RSpec.describe Dealership, type: :model do
       @car_5 = Car.create!(make: 'Jeep', model: 'Cherokee', awd: true, mileage: 67053, dealership_id: @dealership_2.id)
     end
     
-    describe "#cars" do
-      it "returns all cars for given dealership" do
-        expect(@dealership_1.list_cars).to eq([@car_1, @car_4])
-        expect(@dealership_2.list_cars).to eq([@car_2, @car_3, @car_5])
-      end
-    end
-
     describe '#count_of_cars' do
       it 'returns number of cars with dealership as parent' do
         expect(@dealership_1.count_of_cars).to eq 2
         expect(@dealership_2.count_of_cars).to eq 3
+      end
+    end
+    
+    describe '#list_cars' do
+      it 'returns alphabetical list of cars if query specifies' do
+        params = {sort: "alphabetically"}
+        results = @dealership_1.list_cars(params)
+        expected = [@car_1,@car_4]
+        assert_equal(results, expected)
+
+        results = @dealership_2.list_cars(params)
+        expected = [@car_5,@car_2,@car_3]
+        assert_equal(results, expected)
+      end
+      it 'returns list of cars without query' do
+        params = {blank: "blank"}
+        results = @dealership_1.list_cars(params)
+        expected = [@car_1,@car_4]
+        assert_equal(results, expected)
+
+        results = @dealership_2.list_cars(params)
+        expected = [@car_2,@car_3,@car_5]
+        assert_equal(results, expected)
       end
     end
   end
