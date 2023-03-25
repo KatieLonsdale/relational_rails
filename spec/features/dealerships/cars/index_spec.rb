@@ -11,6 +11,7 @@ RSpec.describe "/dealerships/:id/cars", type: :feature do
       @car_4 = Car.create!(make: 'Toyota', model: 'Highlander', awd: true, mileage: 80854, dealership_id: @dealership_1.id)
       @car_5 = Car.create!(make: 'Jeep', model: 'Cherokee', awd: true, mileage: 67053, dealership_id: @dealership_2.id)
       @car_6 = Car.create!(make: 'Jeep', model: 'Grand Cherokee', awd: true, mileage: 20431, dealership_id: @dealership_2.id)
+      @car_7 = Car.create!(make: 'Ford', model: 'Bronco', awd: true, mileage: 204393, dealership_id: @dealership_1.id)
     end
     it "should display the cars that belong to dealership with that id and their attriburtes" do
       visit "/dealerships/#{@dealership_1.id}/cars"
@@ -23,6 +24,10 @@ RSpec.describe "/dealerships/:id/cars", type: :feature do
       expect(page).to have_content(@car_4.model)
       expect(page).to have_content(@car_4.awd)
       expect(page).to have_content(@car_4.mileage)
+
+      expect(page).to have_no_content(@car_2.make)
+      expect(page).to have_no_content(@car_2.model)
+      expect(page).to have_no_content(@car_2.mileage)
 
       visit "/dealerships/#{@dealership_2.id}/cars"
 
@@ -38,6 +43,10 @@ RSpec.describe "/dealerships/:id/cars", type: :feature do
       expect(page).to have_content(@car_5.model)
       expect(page).to have_content(@car_5.awd)
       expect(page).to have_content(@car_5.mileage)
+
+      expect(page).to have_no_content(@car_4.make)
+      expect(page).to have_no_content(@car_4.model)
+      expect(page).to have_no_content(@car_4.mileage)
     end
 
     it 'should have a link to the cars index at the top' do
@@ -77,8 +86,13 @@ RSpec.describe "/dealerships/:id/cars", type: :feature do
     end
     
     it 'should sort alphabetically by model if make is the same' do
+      visit "/dealerships/#{@dealership_1.id}/cars"
+      click_link "Sort in alphabetical order."
+
+      expect(current_path).to eq("/dealerships/#{@dealership_1.id}/cars")
+      expect(@car_1.model).to appear_before(@car_4.model)
+
       visit "/dealerships/#{@dealership_2.id}/cars"
-      expect(page).to have_content("Sort in alphabetical order.")
       click_link "Sort in alphabetical order."
 
       expect(@car_5.model).to appear_before(@car_6.model)
