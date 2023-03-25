@@ -26,19 +26,23 @@ RSpec.describe Dealership, type: :model do
     describe '#list_cars' do
       it 'returns alphabetical list of cars if query specifies' do
         params = {sort: "alphabetically"}
-        expected = @dealership_1.list_cars(params)
-        assert_equal(expected,[@car_1,@car_4])
+        results = @dealership_1.list_cars(params)
+        expected = [@car_1,@car_4]
+        assert_equal(results, expected)
 
-        expected = @dealership_2.list_cars(params)
-        assert_equal(expected,[@car_5,@car_2,@car_3])
+        results = @dealership_2.list_cars(params)
+        expected = [@car_5,@car_2,@car_3]
+        assert_equal(results, expected)
       end
       it 'returns list of cars without query' do
         params = {blank: "blank"}
-        expected = @dealership_1.list_cars(params)
-        assert_equal(expected, [@car_1,@car_4])
+        results = @dealership_1.list_cars(params)
+        expected = [@car_1,@car_4]
+        assert_equal(results, expected)
 
-        expected = @dealership_2.list_cars(params)
-        assert_equal(expected, [@car_2,@car_3,@car_5])
+        results = @dealership_2.list_cars(params)
+        expected = [@car_2,@car_3,@car_5]
+        assert_equal(results, expected)
       end
     end
   end
