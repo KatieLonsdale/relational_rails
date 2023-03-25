@@ -27,14 +27,14 @@ RSpec.describe "/cars", type: :feature do
     end
 
     it 'should have a link to the cars index at the top' do
-      expect(page).to have_content("Click here to view all cars.")
+      expect(page).to have_link("Click here to view all cars.")
       click_link "Click here to view all cars."
 
       expect(current_url).to eq("http://www.example.com/cars")
     end
 
     it 'should have a link to the dealerships index at the top' do
-      expect(page).to have_content("Click here to view all dealerships.")
+      expect(page).to have_link("Click here to view all dealerships.")
       click_link "Click here to view all dealerships."
 
       expect(current_url).to eq("http://www.example.com/dealerships")
