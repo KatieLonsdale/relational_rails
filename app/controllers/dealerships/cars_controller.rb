@@ -1,6 +1,7 @@
   class Dealerships::CarsController < ApplicationController
     def index
       @dealership = Dealership.find(params[:dealership_id])
+      @cars = @dealership.list_cars(params)
     end
 
     def new
