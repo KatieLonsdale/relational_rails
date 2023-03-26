@@ -34,4 +34,12 @@ class DealershipsController < ApplicationController
     dealership.save
     redirect_to "/dealerships/#{dealership.id}"
   end
+
+  def delete
+    dealership = Dealership.find(params[:dealership_id])
+    cars = dealership.list_cars(params)
+    cars.each{|car| car.destroy}
+    dealership.destroy
+    redirect_to '/dealerships'
+  end
 end

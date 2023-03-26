@@ -69,5 +69,27 @@ RSpec.describe "/dealership/:id", type: :feature do
       click_link "Update Dealership."
       expect(current_url).to eq("http://www.example.com/dealerships/#{@dealership_2.id}/edit")
     end
+
+    it 'has a link to delete the dealership' do
+      visit "/dealerships/#{@dealership_1.id}"
+      expect(page).to have_link("Delete Dealership.")
+      click_link "Delete Dealership."
+      expect(current_path).to eq('/dealerships')
+      expect(page).to have_no_content(@dealership_1.name)
+    end
+
+    it 'deletes cars when their parent dealership is deleted' do
+      visit "/dealerships/#{@dealership_1.id}"
+      click_link "Delete Dealership."
+
+      visit "/cars"
+      expect(page).to have_no_content(@car_1.make)
+      expect(page).to have_no_content(@car_1.model)
+      expect(page).to have_no_content(@car_1.mileage)
+
+      expect(page).to have_no_content(@car_4.make)
+      expect(page).to have_no_content(@car_4.model)
+      expect(page).to have_no_content(@car_4.mileage)
+    end
   end
 end
