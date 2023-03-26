@@ -61,5 +61,42 @@ RSpec.describe "/dealerships", type: :feature do
         click_link "Click to edit #{@dealership_3.name}."
         expect(current_url).to eq("http://www.example.com/dealerships/#{@dealership_3.id}/edit")
     end
+
+    it 'should have a link next to each dealership to delete it' do
+      expect(page).to have_link("Delete #{@dealership_1.name}.")
+      click_link "Delete #{@dealership_1.name}."
+      expect(current_path).to eq('/dealerships')
+      expect(page).to have_no_content(@dealership_1.name)
+      
+      expect(page).to have_link("Delete #{@dealership_2.name}.")
+      click_link "Delete #{@dealership_2.name}."
+      expect(current_path).to eq('/dealerships')
+      expect(page).to have_no_content(@dealership_2.name)
+      
+      expect(page).to have_link("Delete #{@dealership_3.name}.")
+      click_link "Delete #{@dealership_3.name}."
+      expect(current_path).to eq('/dealerships')
+      expect(page).to have_no_content(@dealership_3.name)
+    end
+    
+    it 'deletes cars when their parent dealership is deleted' do
+      @car_1 = Car.create!(make: 'Toyota', model: 'Corolla', awd: false, mileage: 30200, dealership_id: @dealership_1.id)
+      @car_2 = Car.create!(make: 'Nissan', model: 'Rogue', awd: true, mileage: 46414, dealership_id: @dealership_1.id)
+      @car_3 = Car.create!(make: 'Porsche', model: '911', awd: true, mileage: 160234, dealership_id: @dealership_2.id)
+      click_link "Delete #{@dealership_1.name}."
+      
+      visit "/cars"
+      expect(page).to have_no_content(@car_1.make)
+      expect(page).to have_no_content(@car_1.model)
+      expect(page).to have_no_content(@car_1.mileage)
+
+      expect(page).to have_no_content(@car_2.make)
+      expect(page).to have_no_content(@car_2.model)
+      expect(page).to have_no_content(@car_2.mileage)
+
+      expect(page).to have_content(@car_3.make)
+      expect(page).to have_content(@car_3.model)
+      expect(page).to have_content(@car_3.mileage)
+    end
   end
 end
