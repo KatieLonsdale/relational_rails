@@ -73,5 +73,24 @@ RSpec.describe "/cars", type: :feature do
       click_link "Click to edit #{@car_4.make} #{@car_4.model}."
       expect(current_url).to eq("http://www.example.com/cars/#{@car_4.id}/edit")
     end
+
+    it 'should have a link next to each car to delete its info' do
+      expect(page).to have_link("Delete #{@car_2.make} #{@car_2.model}.")
+      click_link "Delete #{@car_2.make} #{@car_2.model}."
+      expect(current_path).to eq('/cars')
+      expect(page).to have_no_content(@car_2.make)
+      expect(page).to have_no_content(@car_2.model)
+      expect(page).to have_no_content(@car_2.mileage)
+      expect(page).to have_content(@car_4.make)
+      expect(page).to have_content(@car_4.model)
+      expect(page).to have_content(@car_4.mileage)
+
+      expect(page).to have_link("Delete #{@car_4.make} #{@car_4.model}.")
+      click_link "Delete #{@car_4.make} #{@car_4.model}."
+      expect(current_path).to eq('/cars')
+      expect(page).to have_no_content(@car_4.make)
+      expect(page).to have_no_content(@car_4.model)
+      expect(page).to have_no_content(@car_4.mileage)
+    end
   end
 end

@@ -136,5 +136,24 @@ RSpec.describe "/dealerships/:id/cars", type: :feature do
       expect(page).to have_no_content(@car_1.model)
       expect(page).to have_no_content(@car_1.mileage)
     end
+
+    it 'should have a link next to each car to delete its info' do
+      visit "/dealerships/#{@dealership_1.id}/cars"
+
+      expect(page).to have_link("Delete #{@car_7.make} #{@car_7.model}.")
+      click_link "Delete #{@car_7.make} #{@car_7.model}."
+      expect(current_path).to eq("/cars")
+      expect(page).to have_no_content(@car_7.make)
+      expect(page).to have_no_content(@car_7.model)
+      expect(page).to have_no_content(@car_7.mileage)
+
+      visit "/dealerships/#{@dealership_2.id}/cars"
+
+      expect(page).to have_link("Delete #{@car_6.make} #{@car_6.model}.")
+      click_link "Delete #{@car_6.make} #{@car_6.model}."
+      expect(current_path).to eq("/cars")
+      expect(page).to have_no_content(@car_6.model)
+      expect(page).to have_no_content(@car_6.mileage)
+    end
   end
 end
