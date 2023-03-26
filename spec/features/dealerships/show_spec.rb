@@ -90,6 +90,10 @@ RSpec.describe "/dealership/:id", type: :feature do
       expect(page).to have_no_content(@car_4.make)
       expect(page).to have_no_content(@car_4.model)
       expect(page).to have_no_content(@car_4.mileage)
+
+      expect(page).to have_content(@car_5.make)
+      expect(page).to have_content(@car_5.model)
+      expect(page).to have_content(@car_5.mileage)
     end
   end
 end
