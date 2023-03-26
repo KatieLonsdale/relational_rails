@@ -1,6 +1,7 @@
 <% @dealerships.each do |dealership| %>
   <p><%= dealership.name %>
-  <%= link_to "Click to edit #{dealership.name}.", "/dealerships/#{dealership.id}/edit"%><br>
+  <%= link_to "Click to edit #{dealership.name}.", "/dealerships/#{dealership.id}/edit"%>
+  <%= link_to "Delete #{dealership.name}.", "/dealerships/#{dealership.id}", method: :delete %><br>
   <%= "Created at: #{dealership.created_at}" %></p>
 <% end %>
 
