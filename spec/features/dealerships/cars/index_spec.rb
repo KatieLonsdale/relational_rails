@@ -119,5 +119,28 @@ RSpec.describe "/dealerships/:id/cars", type: :feature do
       click_link "Click to edit #{@car_6.make} #{@car_6.model}."
       expect(current_url).to eq("http://www.example.com/cars/#{@car_6.id}/edit")
     end
+
+    it 'has a form that allows me to only see cars over a mileage I specify' do
+      visit "/dealerships/#{@dealership_1.id}/cars"
+      expect(page).to have_field("mileage")
+      expect(page).to have_content("Show me cars with over:")
+      expect(page).to have_content("miles.")
+      fill_in(:mileage, with: '65,000')
+      click_button('Filter')
+
+      expect(current_path).to eq("/dealerships/#{@dealership_1.id}/cars")
+      expect(page).to have_content(@car_4.model)
+      expect(page).to have_content(@car_4.mileage)
+      expect(page).to have_content(@car_7.model)
+      expect(page).to have_content(@car_7.mileage)
+      expect(page).to have_no_content(@car_1.model)
+      expect(page).to have_no_content(@car_1.mileage)
+    end
   end
 end
+
+# As a visitor
+# When I visit the Parent's children Index Page
+# I see a form that allows me to input a number value
+# When I input a number value and click the submit button that reads 'Only return records with more than `number` of `column_name`'
+# Then I am brought back to the current index page with only the records that meet that threshold shown.
