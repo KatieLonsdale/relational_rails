@@ -138,9 +138,3 @@ RSpec.describe "/dealerships/:id/cars", type: :feature do
     end
   end
 end
-
-# As a visitor
-# When I visit the Parent's children Index Page
-# I see a form that allows me to input a number value
-# When I input a number value and click the submit button that reads 'Only return records with more than `number` of `column_name`'
-# Then I am brought back to the current index page with only the records that meet that threshold shown.
