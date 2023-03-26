@@ -10,6 +10,7 @@ RSpec.describe "/cars/:id", type: :feature do
       @car_1 = Car.create!(make: 'Toyota', model: 'Corolla', awd: false, mileage: 30200, dealership_id: @dealership_1.id)
       @car_2 = Car.create!(make: 'Nissan', model: 'Rogue', awd: true, mileage: 46414, dealership_id: @dealership_2.id)
       @car_3 = Car.create!(make: 'Porsche', model: '911', awd: false, mileage: 160234, dealership_id: @dealership_3.id)
+      @car_4 = Car.create!(make: 'Jeep', model: 'Cherokee', awd: true, mileage: 67053, dealership_id: @dealership_2.id)
     end
     it "should display car with that id and its attributes" do
       visit "/cars/#{@car_1.id}"
@@ -57,6 +58,23 @@ RSpec.describe "/cars/:id", type: :feature do
       expect(page).to have_link("Update Car.")
       click_link "Update Car."
       expect(current_url).to eq("http://www.example.com/cars/#{@car_1.id}/edit")
+    end
+
+    it 'has a link to delete the car' do
+      visit "/cars/#{@car_1.id}"
+      expect(page).to have_link("Delete Car.")
+      click_link "Delete Car."
+      expect(current_path).to eq('/cars')
+      expect(page).to have_no_content(@car_1.model)
+
+      visit "/cars/#{@car_2.id}"
+      expect(page).to have_link("Delete Car.")
+      click_link "Delete Car."
+      expect(current_path).to eq('/cars')
+      expect(page).to have_no_content(@car_2.model)
+      expect(page).to have_content(@car_4.make)
+      expect(page).to have_content(@car_4.model)
+      expect(page).to have_content(@car_4.mileage)
     end
   end
 end
