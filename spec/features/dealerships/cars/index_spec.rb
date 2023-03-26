@@ -97,5 +97,27 @@ RSpec.describe "/dealerships/:id/cars", type: :feature do
 
       expect(@car_5.model).to appear_before(@car_6.model)
     end
+
+    it 'should have a link next to each car to edit its info' do
+      visit "/dealerships/#{@dealership_1.id}/cars"
+      expect(page).to have_link("Click to edit #{@car_1.make} #{@car_1.model}.")
+      click_link "Click to edit #{@car_1.make} #{@car_1.model}."
+      expect(current_url).to eq("http://www.example.com/cars/#{@car_1.id}/edit")
+
+      visit "/dealerships/#{@dealership_1.id}/cars"
+      expect(page).to have_link("Click to edit #{@car_4.make} #{@car_4.model}.")
+      click_link "Click to edit #{@car_4.make} #{@car_4.model}."
+      expect(current_url).to eq("http://www.example.com/cars/#{@car_4.id}/edit")
+
+      visit "/dealerships/#{@dealership_2.id}/cars"
+      expect(page).to have_link("Click to edit #{@car_2.make} #{@car_2.model}.")
+      click_link "Click to edit #{@car_2.make} #{@car_2.model}."
+      expect(current_url).to eq("http://www.example.com/cars/#{@car_2.id}/edit")
+
+      visit "/dealerships/#{@dealership_2.id}/cars"
+      expect(page).to have_link("Click to edit #{@car_6.make} #{@car_6.model}.")
+      click_link "Click to edit #{@car_6.make} #{@car_6.model}."
+      expect(current_url).to eq("http://www.example.com/cars/#{@car_6.id}/edit")
+    end
   end
 end

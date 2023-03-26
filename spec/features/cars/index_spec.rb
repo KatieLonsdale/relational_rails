@@ -61,5 +61,17 @@ RSpec.describe "/cars", type: :feature do
       expect(page).to have_content(@car_4.awd)
       expect(page).to have_content(@car_4.mileage)
     end
+
+    it 'should have a link next to each car to edit its info' do
+      visit "/cars"
+      expect(page).to have_link("Click to edit #{@car_2.make} #{@car_2.model}.")
+      click_link "Click to edit #{@car_2.make} #{@car_2.model}."
+      expect(current_url).to eq("http://www.example.com/cars/#{@car_2.id}/edit")
+
+      visit "/cars"
+      expect(page).to have_link("Click to edit #{@car_4.make} #{@car_4.model}.")
+      click_link "Click to edit #{@car_4.make} #{@car_4.model}."
+      expect(current_url).to eq("http://www.example.com/cars/#{@car_4.id}/edit")
+    end
   end
 end

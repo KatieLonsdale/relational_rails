@@ -1,5 +1,6 @@
 <% @cars.each do |car| %>
-<h3><%= "#{car.make} #{car.model}" %></h3>
+<h3><%= "#{car.make} #{car.model}" %>
+<%= link_to "Click to edit #{car.make} #{car.model}.", "/cars/#{car.id}/edit" %></h3>
 <p>AWD: <%= car.awd %></p>
 <p>Mileage: <%= car.mileage %></p>
 <% end %>
