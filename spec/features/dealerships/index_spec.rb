@@ -26,24 +26,40 @@ RSpec.describe "/dealerships", type: :feature do
     end
 
     it 'should have a link to the cars index at the top' do
-      expect(page).to have_content("Click here to view all cars.")
+      expect(page).to have_link("Click here to view all cars.")
       click_link("Click here to view all cars.")
 
       expect(current_url).to eq("http://www.example.com/cars")
     end
 
     it 'should have a link to the dealerships index at the top' do
-      expect(page).to have_content("Click here to view all dealerships.")
+      expect(page).to have_link("Click here to view all dealerships.")
       click_link "Click here to view all dealerships."
 
       expect(current_url).to eq("http://www.example.com/dealerships")
     end
 
     it 'should have a link to a page where you can create a dealership' do
-      expect(page).to have_content("New dealership.")
+      expect(page).to have_link("New dealership.")
       click_link "New dealership."
 
       expect(current_url).to eq("http://www.example.com/dealerships/new")
+    end
+
+    it 'should have a link next to each dealership to edit its info' do
+        expect(page).to have_link("Click to edit #{@dealership_1.name}.")
+        click_link "Click to edit #{@dealership_1.name}."
+        expect(current_url).to eq("http://www.example.com/dealerships/#{@dealership_1.id}/edit")
+
+        visit "/dealerships"
+        expect(page).to have_link("Click to edit #{@dealership_2.name}.")
+        click_link "Click to edit #{@dealership_2.name}."
+        expect(current_url).to eq("http://www.example.com/dealerships/#{@dealership_2.id}/edit")
+
+        visit "/dealerships"
+        expect(page).to have_link("Click to edit #{@dealership_3.name}.")
+        click_link "Click to edit #{@dealership_3.name}."
+        expect(current_url).to eq("http://www.example.com/dealerships/#{@dealership_3.id}/edit")
     end
   end
 end

@@ -1,6 +1,7 @@
 <% @dealerships.each do |dealership| %>
   <p><%= dealership.name %>
-  <%= dealership.created_at %></p>
+  <%= link_to "Click to edit #{dealership.name}.", "/dealerships/#{dealership.id}/edit"%><br>
+  <%= "Created at: #{dealership.created_at}" %></p>
 <% end %>
 
 <p><%= link_to "New dealership.", "/dealerships/new" %></p>
