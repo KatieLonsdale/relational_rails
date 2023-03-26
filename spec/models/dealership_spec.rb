@@ -34,6 +34,16 @@ RSpec.describe Dealership, type: :model do
         expected = [@car_5,@car_2,@car_3]
         assert_equal(results, expected)
       end
+      it 'returns filtered list of cars based on specified mileage' do
+        params = {commit: "Filter", mileage: "65,000"}
+        results = @dealership_1.list_cars(params)
+        expected = [@car_4]
+        assert_equal(results, expected)
+
+        results = @dealership_2.list_cars(params)
+        expected = [@car_3,@car_5]
+        assert_equal(results, expected)
+      end
       it 'returns list of cars without query' do
         params = {blank: "blank"}
         results = @dealership_1.list_cars(params)
