@@ -45,11 +45,21 @@ RSpec.describe "/dealerships", type: :feature do
 
       expect(current_url).to eq("http://www.example.com/dealerships/new")
     end
+
+    it 'should have a link next to each dealership to edit its info' do
+        expect(page).to have_link("Click to edit #{@dealership_1.name}.")
+        click_link "Click to edit #{@dealership_1.name}."
+        expect(current_url).to eq("http://www.example.com/dealerships/#{@dealership_1.id}/edit")
+
+        visit "/dealerships"
+        expect(page).to have_link("Click to edit #{@dealership_2.name}.")
+        click_link "Click to edit #{@dealership_2.name}."
+        expect(current_url).to eq("http://www.example.com/dealerships/#{@dealership_2.id}/edit")
+
+        visit "/dealerships"
+        expect(page).to have_link("Click to edit #{@dealership_3.name}.")
+        click_link "Click to edit #{@dealership_3.name}."
+        expect(current_url).to eq("http://www.example.com/dealerships/#{@dealership_3.id}/edit")
+    end
   end
 end
-
-# As a visitor
-# When I visit the parent index page
-# Next to every parent, I see a link to edit that parent's info
-# When I click the link
-# I should be taken to that parent's edit page where I can update its information just like in User Story 12
