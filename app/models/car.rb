@@ -8,4 +8,9 @@ class Car < ApplicationRecord
   def self.sort_alphabetically
     Car.order(:make, :model)
   end
+
+  def self.filter_by_mileage(mileage)
+    miles = mileage.delete(',').to_i
+    Car.where("mileage > #{miles}")
+  end
 end

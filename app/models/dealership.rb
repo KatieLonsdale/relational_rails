@@ -5,6 +5,8 @@ class Dealership < ApplicationRecord
     dealership_cars = Car.where(dealership_id: id)
     if params[:sort] == "alphabetically"
       @cars = dealership_cars.sort_alphabetically
+    elsif params[:commit] == "Filter"
+      @cars = dealership_cars.filter_by_mileage(params[:mileage])
     else
       @cars = dealership_cars.all
     end

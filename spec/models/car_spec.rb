@@ -29,5 +29,12 @@ RSpec.describe Car, type: :model do
         assert_equal(results, expected)
       end
     end
+    describe '::filter_by_mileage' do
+      it 'returns an array of cars that are above given mileage' do
+        results = Car.filter_by_mileage("80,000")
+        expected = [@car_3, @car_4]
+        assert_equal(results, expected)
+      end
+    end
   end
 end

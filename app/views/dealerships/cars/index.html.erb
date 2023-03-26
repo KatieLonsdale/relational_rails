@@ -8,3 +8,8 @@
 <p><%= link_to "Add a new car.", "/dealerships/#{@dealership.id}/cars/new" %></p><br>
 
 <p><%= link_to "Sort in alphabetical order.", "/dealerships/#{@dealership.id}/cars?sort=alphabetically" %></p><br>
+
+<p>Show me cars with over:<%= form_with url: "/dealerships/#{@dealership.id}/cars", method: :get, local: true do |form| %>
+<%= form.text_field :mileage %> miles.
+<%= form.submit "Filter" %>
+<% end %></p>
