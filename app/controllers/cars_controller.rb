@@ -22,4 +22,10 @@ class CarsController < ApplicationController
     car.save
     redirect_to "/cars/#{car.id}"
   end
+
+  def delete
+    car = Car.find(params[:car_id])
+    car.destroy
+    redirect_to '/cars'
+  end
 end

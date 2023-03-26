@@ -3,3 +3,4 @@
 <p>Mileage: <%= @car.mileage %></p>
 
 <p><%= link_to "Update Car.", "/cars/#{@car.id}/edit" %></p>
+<p><%= link_to "Delete Car.", "/cars/#{@car.id}", method: :delete %></p>
