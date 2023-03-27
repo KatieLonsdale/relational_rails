@@ -9,14 +9,13 @@
     end
 
     def create
-      car = Car.new({
-        make: params[:make],
-        model: params[:model],
-        awd: params[:awd],
-        mileage: params[:mileage],
-        dealership_id: params[:dealership_id]
-      })
+      car = Car.new(car_params)
       car.save
       redirect_to "/dealerships/#{params[:dealership_id]}/cars"
+    end
+
+    private
+    def car_params
+      params.permit(:make, :model, :awd, :mileage, :dealership_id)
     end
   end
