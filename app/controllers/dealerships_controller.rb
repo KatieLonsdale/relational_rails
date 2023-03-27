@@ -11,11 +11,7 @@ class DealershipsController < ApplicationController
   end
 
   def create
-    dealership = Dealership.new({
-      name: params[:name],
-      financing_available: params[:financing_available],
-      employees: params[:employees]
-    })
+    dealership = Dealership.new(dealership_params)
     dealership.save
     redirect_to '/dealerships'
   end
@@ -26,11 +22,7 @@ class DealershipsController < ApplicationController
 
   def update
     dealership = Dealership.find(params[:dealership_id])
-    dealership.update({
-    name: params[:name],
-    financing_available: params[:financing_available],
-    employees: params[:employees]
-    })
+    dealership.update(dealership_params)
     dealership.save
     redirect_to "/dealerships/#{dealership.id}"
   end
@@ -41,5 +33,10 @@ class DealershipsController < ApplicationController
     cars.each{|car| car.destroy}
     dealership.destroy
     redirect_to '/dealerships'
+  end
+
+  private
+  def dealership_params
+    params.permit(:name, :financing_available, :employees)
   end
 end
