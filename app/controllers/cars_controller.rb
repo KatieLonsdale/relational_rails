@@ -13,12 +13,7 @@ class CarsController < ApplicationController
 
   def update
     car = Car.find(params[:car_id])
-    car.update({
-    make: params[:make],
-    model: params[:model],
-    awd: params[:awd],
-    mileage: params[:mileage]
-    })
+    car.update(car_params)
     car.save
     redirect_to "/cars/#{car.id}"
   end
@@ -27,5 +22,10 @@ class CarsController < ApplicationController
     car = Car.find(params[:car_id])
     car.destroy
     redirect_to '/cars'
+  end
+
+  private
+  def car_params
+    params.permit(:make, :model, :awd, :mileage, :dealership_id)
   end
 end
