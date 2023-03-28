@@ -52,8 +52,8 @@ RSpec.describe "/dealerships/:id/cars", type: :feature do
     it 'should have a link to the cars index at the top' do
       visit "/dealerships/#{@dealership_1.id}/cars"
 
-      expect(page).to have_link("Click here to view all cars.")
-      click_link "Click here to view all cars."
+      expect(page).to have_link("View all cars.")
+      click_link "View all cars."
 
       expect(current_url).to eq("http://www.example.com/cars")
     end
@@ -61,8 +61,8 @@ RSpec.describe "/dealerships/:id/cars", type: :feature do
     it 'should have a link to the dealerships index at the top' do
       visit "/dealerships/#{@dealership_1.id}/cars"
 
-      expect(page).to have_link("Click here to view all dealerships.")
-      click_link "Click here to view all dealerships."
+      expect(page).to have_link("View all dealerships.")
+      click_link "View all dealerships."
 
       expect(current_url).to eq("http://www.example.com/dealerships")
     end
@@ -100,23 +100,23 @@ RSpec.describe "/dealerships/:id/cars", type: :feature do
 
     it 'should have a link next to each car to edit its info' do
       visit "/dealerships/#{@dealership_1.id}/cars"
-      expect(page).to have_link("Click to edit #{@car_1.make} #{@car_1.model}.")
-      click_link "Click to edit #{@car_1.make} #{@car_1.model}."
+      expect(page).to have_link("Edit #{@car_1.make} #{@car_1.model}.")
+      click_link "Edit #{@car_1.make} #{@car_1.model}."
       expect(current_url).to eq("http://www.example.com/cars/#{@car_1.id}/edit")
 
       visit "/dealerships/#{@dealership_1.id}/cars"
-      expect(page).to have_link("Click to edit #{@car_4.make} #{@car_4.model}.")
-      click_link "Click to edit #{@car_4.make} #{@car_4.model}."
+      expect(page).to have_link("Edit #{@car_4.make} #{@car_4.model}.")
+      click_link "Edit #{@car_4.make} #{@car_4.model}."
       expect(current_url).to eq("http://www.example.com/cars/#{@car_4.id}/edit")
 
       visit "/dealerships/#{@dealership_2.id}/cars"
-      expect(page).to have_link("Click to edit #{@car_2.make} #{@car_2.model}.")
-      click_link "Click to edit #{@car_2.make} #{@car_2.model}."
+      expect(page).to have_link("Edit #{@car_2.make} #{@car_2.model}.")
+      click_link "Edit #{@car_2.make} #{@car_2.model}."
       expect(current_url).to eq("http://www.example.com/cars/#{@car_2.id}/edit")
 
       visit "/dealerships/#{@dealership_2.id}/cars"
-      expect(page).to have_link("Click to edit #{@car_6.make} #{@car_6.model}.")
-      click_link "Click to edit #{@car_6.make} #{@car_6.model}."
+      expect(page).to have_link("Edit #{@car_6.make} #{@car_6.model}.")
+      click_link "Edit #{@car_6.make} #{@car_6.model}."
       expect(current_url).to eq("http://www.example.com/cars/#{@car_6.id}/edit")
     end
 
