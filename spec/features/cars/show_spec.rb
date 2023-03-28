@@ -38,8 +38,8 @@ RSpec.describe "/cars/:id", type: :feature do
     it 'should have a link to the cars index at the top' do
       visit "/cars/#{@car_1.id}"
 
-      expect(page).to have_link("Click here to view all cars.")
-      click_link "Click here to view all cars."
+      expect(page).to have_link("View all cars.")
+      click_link "View all cars."
 
       expect(current_url).to eq("http://www.example.com/cars")
     end
@@ -47,8 +47,8 @@ RSpec.describe "/cars/:id", type: :feature do
     it 'should have a link to the dealerships index at the top' do
       visit "/cars/#{@car_1.id}"
 
-      expect(page).to have_link("Click here to view all dealerships.")
-      click_link "Click here to view all dealerships."
+      expect(page).to have_link("View all dealerships.")
+      click_link "View all dealerships."
 
       expect(current_url).to eq("http://www.example.com/dealerships")
     end
