@@ -17,7 +17,7 @@ class DealershipsController < ApplicationController
   end
 
   def edit
-    @dealership=Dealership.find(params[:dealership_id])
+    @dealership = Dealership.find(params[:dealership_id])
   end
 
   def update
