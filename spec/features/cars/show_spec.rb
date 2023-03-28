@@ -55,8 +55,10 @@ RSpec.describe "/cars/:id", type: :feature do
 
     it 'has a link to update the car' do
       visit "/cars/#{@car_1.id}"
+
       expect(page).to have_link("Update Car.")
       click_link "Update Car."
+      
       expect(current_path).to eq("/cars/#{@car_1.id}/edit")
     end
 
