@@ -1,6 +1,6 @@
 class DealershipsController < ApplicationController
   def index
-    @dealerships = Dealership.all.order(created_at: :desc)
+    @dealerships = Dealership.dealerships_by_created_at
   end
 
   def show
@@ -17,7 +17,7 @@ class DealershipsController < ApplicationController
   end
 
   def edit
-    @dealership=Dealership.find(params[:dealership_id])
+    @dealership = Dealership.find(params[:dealership_id])
   end
 
   def update

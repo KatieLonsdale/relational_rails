@@ -1,11 +1,11 @@
-  <% @cars.each do |car| %>
-    <h3><%= "#{car.make} #{car.model}" %>
-    <%= link_to "Click to edit #{car.make} #{car.model}.", "/cars/#{car.id}/edit" %>
-    <%= link_to "Delete #{car.make} #{car.model}.", "/cars/#{car.id}", method: :delete %></p></h3>
-    </h3>
-    <p>AWD? <%= car.awd %></p>
-    <p>Mileage: <%= car.mileage %></p>
-  <% end %>  
+<% @cars.each do |car| %>
+  <h3><%= "#{car.make} #{car.model}" %>
+  <%= link_to "Click to edit #{car.make} #{car.model}.", "/cars/#{car.id}/edit" %>
+  <%= link_to "Delete #{car.make} #{car.model}.", "/cars/#{car.id}", method: :delete %></p></h3>
+  </h3>
+  <p>AWD? <%= car.awd %></p>
+  <p>Mileage: <%= car.mileage %></p>
+<% end %>  
 
 <p><%= link_to "Add a new car.", "/dealerships/#{@dealership.id}/cars/new" %></p><br>
 
