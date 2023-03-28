@@ -92,5 +92,16 @@ RSpec.describe "/cars", type: :feature do
       expect(page).to have_no_content(@car_4.model)
       expect(page).to have_no_content(@car_4.mileage)
     end
+
+    it 'has links to each cars show page' do
+      expect(page).to have_link("#{@car_2.make} #{@car_2.model}", exact: true)
+      click_link("#{@car_2.make} #{@car_2.model}")
+      expect(current_path).to eq("/cars/#{@car_2.id}")
+
+      visit "/cars"
+      expect(page).to have_link("#{@car_4.make} #{@car_4.model}", exact: true)
+      click_link("#{@car_4.make} #{@car_4.model}")
+      expect(current_path).to eq("/cars/#{@car_4.id}")
+    end
   end
 end
