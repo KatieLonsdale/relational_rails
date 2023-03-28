@@ -4,11 +4,11 @@ class CarsController < ApplicationController
   end
 
   def show
-    @car = Car.find(params[:id])
+    @car = Car.find(params[:car_id])
   end
 
   def edit
-    @car=Car.find(params[:id])
+    @car=Car.find(params[:car_id])
   end
 
   def update
