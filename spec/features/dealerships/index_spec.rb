@@ -26,40 +26,40 @@ RSpec.describe "/dealerships", type: :feature do
     end
 
     it 'should have a link to the cars index at the top' do
-      expect(page).to have_link("Click here to view all cars.")
-      click_link("Click here to view all cars.")
+      expect(page).to have_link("View all cars.")
+      click_link("View all cars.")
 
-      expect(current_url).to eq("http://www.example.com/cars")
+      expect(current_path).to eq("/cars")
     end
 
     it 'should have a link to the dealerships index at the top' do
-      expect(page).to have_link("Click here to view all dealerships.")
-      click_link "Click here to view all dealerships."
+      expect(page).to have_link("View all dealerships.")
+      click_link "View all dealerships."
 
-      expect(current_url).to eq("http://www.example.com/dealerships")
+      expect(current_path).to eq("/dealerships")
     end
 
     it 'should have a link to a page where you can create a dealership' do
       expect(page).to have_link("New dealership.")
       click_link "New dealership."
 
-      expect(current_url).to eq("http://www.example.com/dealerships/new")
+      expect(current_path).to eq("/dealerships/new")
     end
 
     it 'should have a link next to each dealership to edit its info' do
-        expect(page).to have_link("Click to edit #{@dealership_1.name}.")
-        click_link "Click to edit #{@dealership_1.name}."
-        expect(current_url).to eq("http://www.example.com/dealerships/#{@dealership_1.id}/edit")
+        expect(page).to have_link("Edit #{@dealership_1.name}.")
+        click_link "Edit #{@dealership_1.name}."
+        expect(current_path).to eq("/dealerships/#{@dealership_1.id}/edit")
 
         visit "/dealerships"
-        expect(page).to have_link("Click to edit #{@dealership_2.name}.")
-        click_link "Click to edit #{@dealership_2.name}."
-        expect(current_url).to eq("http://www.example.com/dealerships/#{@dealership_2.id}/edit")
+        expect(page).to have_link("Edit #{@dealership_2.name}.")
+        click_link "Edit #{@dealership_2.name}."
+        expect(current_path).to eq("/dealerships/#{@dealership_2.id}/edit")
 
         visit "/dealerships"
-        expect(page).to have_link("Click to edit #{@dealership_3.name}.")
-        click_link "Click to edit #{@dealership_3.name}."
-        expect(current_url).to eq("http://www.example.com/dealerships/#{@dealership_3.id}/edit")
+        expect(page).to have_link("Edit #{@dealership_3.name}.")
+        click_link "Edit #{@dealership_3.name}."
+        expect(current_path).to eq("/dealerships/#{@dealership_3.id}/edit")
     end
 
     it 'should have a link next to each dealership to delete it' do
@@ -80,7 +80,7 @@ RSpec.describe "/dealerships", type: :feature do
     end
     
     it 'deletes cars when their parent dealership is deleted' do
-      @car_1 = Car.create!(make: 'Toyota', model: 'Corolla', awd: false, mileage: 30200, dealership_id: @dealership_1.id)
+      @car_1 = Car.create!(make: 'Toyota', model: 'Corolla', awd: true, mileage: 30200, dealership_id: @dealership_1.id)
       @car_2 = Car.create!(make: 'Nissan', model: 'Rogue', awd: true, mileage: 46414, dealership_id: @dealership_1.id)
       @car_3 = Car.create!(make: 'Porsche', model: '911', awd: true, mileage: 160234, dealership_id: @dealership_2.id)
       click_link "Delete #{@dealership_1.name}."
@@ -97,6 +97,17 @@ RSpec.describe "/dealerships", type: :feature do
       expect(page).to have_content(@car_3.make)
       expect(page).to have_content(@car_3.model)
       expect(page).to have_content(@car_3.mileage)
+    end
+
+    it 'has links to each of the dealerships show pages' do
+      expect(page).to have_link("#{@dealership_1.name}", exact: true)
+      click_link("#{@dealership_1.name}")
+      expect(current_path).to eq("/dealerships/#{@dealership_1.id}")
+
+      visit "/dealerships"
+      expect(page).to have_link("#{@dealership_2.name}", exact: true)
+      click_link("#{@dealership_2.name}")
+      expect(current_path).to eq("/dealerships/#{@dealership_2.id}")
     end
   end
 end

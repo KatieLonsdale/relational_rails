@@ -22,52 +22,52 @@ RSpec.describe "/dealership/:id", type: :feature do
     
     it "shows a count of cars each dealership has" do
       visit "/dealerships/#{@dealership_1.id}"
-      expect(page).to have_content("2 cars available")
+      expect(page).to have_content("#{@dealership_1.count_of_cars} cars available")
 
       visit "/dealerships/#{@dealership_2.id}"
-      expect(page).to have_content("3 cars available")
+      expect(page).to have_content("#{@dealership_2.count_of_cars} cars available")
     end
 
     it 'should have a link to the child index at the top' do
       visit "/dealerships/#{@dealership_1.id}"
 
-      expect(page).to have_link("Click here to view all cars.")
-      click_link("Click here to view all cars.")
+      expect(page).to have_link("View all cars.")
+      click_link("View all cars.")
 
-      expect(current_url).to eq("http://www.example.com/cars")
+      expect(current_path).to eq("/cars")
     end
 
     it 'should have a link to the dealerships index at the top' do
       visit "/dealerships/#{@dealership_1.id}"
 
-      expect(page).to have_link("Click here to view all dealerships.")
-      click_link "Click here to view all dealerships."
+      expect(page).to have_link("View all dealerships.")
+      click_link "View all dealerships."
 
-      expect(current_url).to eq("http://www.example.com/dealerships")
+      expect(current_path).to eq("/dealerships")
     end
 
     it 'should have a link to the index of cars that belong to dealership' do
       visit "/dealerships/#{@dealership_1.id}"
-      expect(page).to have_link("Click here to view this dealership's inventory.")
-      click_link "Click here to view this dealership's inventory."
-      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealership_1.id}/cars")
+      expect(page).to have_link("View this dealership's inventory.")
+      click_link "View this dealership's inventory."
+      expect(current_path).to eq("/dealerships/#{@dealership_1.id}/cars")
 
       visit "/dealerships/#{@dealership_2.id}"
-      expect(page).to have_link("Click here to view this dealership's inventory.")
-      click_link "Click here to view this dealership's inventory."
-      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealership_2.id}/cars")
+      expect(page).to have_link("View this dealership's inventory.")
+      click_link "View this dealership's inventory."
+      expect(current_path).to eq("/dealerships/#{@dealership_2.id}/cars")
     end
 
     it 'has a link to update the dealership' do
       visit "/dealerships/#{@dealership_1.id}"
       expect(page).to have_link("Update Dealership.")
       click_link "Update Dealership."
-      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealership_1.id}/edit")
+      expect(current_path).to eq("/dealerships/#{@dealership_1.id}/edit")
 
       visit "/dealerships/#{@dealership_2.id}"
       expect(page).to have_link("Update Dealership.")
       click_link "Update Dealership."
-      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealership_2.id}/edit")
+      expect(current_path).to eq("/dealerships/#{@dealership_2.id}/edit")
     end
 
     it 'has a link to delete the dealership' do
@@ -76,6 +76,12 @@ RSpec.describe "/dealership/:id", type: :feature do
       click_link "Delete Dealership."
       expect(current_path).to eq('/dealerships')
       expect(page).to have_no_content(@dealership_1.name)
+
+      visit "/dealerships/#{@dealership_2.id}"
+      expect(page).to have_link("Delete Dealership.")
+      click_link "Delete Dealership."
+      expect(current_path).to eq('/dealerships')
+      expect(page).to have_no_content(@dealership_2.name)
     end
 
     it 'deletes cars when their parent dealership is deleted' do
@@ -94,6 +100,18 @@ RSpec.describe "/dealership/:id", type: :feature do
       expect(page).to have_content(@car_5.make)
       expect(page).to have_content(@car_5.model)
       expect(page).to have_content(@car_5.mileage)
+
+      visit "/dealerships/#{@dealership_2.id}"
+      click_link "Delete Dealership."
+
+      visit "/cars"
+      expect(page).to have_no_content(@car_2.make)
+      expect(page).to have_no_content(@car_2.model)
+      expect(page).to have_no_content(@car_2.mileage)
+
+      expect(page).to have_no_content(@car_5.make)
+      expect(page).to have_no_content(@car_5.model)
+      expect(page).to have_no_content(@car_5.mileage)
     end
   end
 end

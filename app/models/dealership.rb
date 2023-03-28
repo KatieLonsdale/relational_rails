@@ -5,6 +5,10 @@ class Dealership < ApplicationRecord
     Dealership.all.order(created_at: :desc)
   end
 
+  def count_of_cars
+    cars.count
+  end
+
   def list_cars(params)
     dealership_cars = Car.where(dealership_id: id)
     if params[:sort] == "alphabetically"
@@ -14,9 +18,5 @@ class Dealership < ApplicationRecord
     else
       @cars = dealership_cars.all
     end
-  end
-
-  def count_of_cars
-    cars.count
   end
 end

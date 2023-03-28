@@ -13,7 +13,7 @@ RSpec.describe "/dealerships/:id/cars", type: :feature do
       @car_6 = Car.create!(make: 'Jeep', model: 'Grand Cherokee', awd: true, mileage: 20431, dealership_id: @dealership_2.id)
       @car_7 = Car.create!(make: 'Ford', model: 'Bronco', awd: true, mileage: 204393, dealership_id: @dealership_1.id)
     end
-    it "should display the cars that belong to dealership with that id and their attriburtes" do
+    it "should display the cars that belong to dealership with that id and their attributes" do
       visit "/dealerships/#{@dealership_1.id}/cars"
 
       expect(page).to have_content(@car_1.make)
@@ -52,19 +52,19 @@ RSpec.describe "/dealerships/:id/cars", type: :feature do
     it 'should have a link to the cars index at the top' do
       visit "/dealerships/#{@dealership_1.id}/cars"
 
-      expect(page).to have_link("Click here to view all cars.")
-      click_link "Click here to view all cars."
+      expect(page).to have_link("View all cars.")
+      click_link "View all cars."
 
-      expect(current_url).to eq("http://www.example.com/cars")
+      expect(current_path).to eq("/cars")
     end
 
     it 'should have a link to the dealerships index at the top' do
       visit "/dealerships/#{@dealership_1.id}/cars"
 
-      expect(page).to have_link("Click here to view all dealerships.")
-      click_link "Click here to view all dealerships."
+      expect(page).to have_link("View all dealerships.")
+      click_link "View all dealerships."
 
-      expect(current_url).to eq("http://www.example.com/dealerships")
+      expect(current_path).to eq("/dealerships")
     end
 
     it 'should have a link to add a new car for that dealership' do
@@ -72,7 +72,7 @@ RSpec.describe "/dealerships/:id/cars", type: :feature do
       expect(page).to have_link("Add a new car.")
       click_link "Add a new car."
 
-      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealership_1.id}/cars/new")
+      expect(current_path).to eq("/dealerships/#{@dealership_1.id}/cars/new")
     end
 
     it 'should have a link to sort cars in alphabetical order' do
@@ -100,24 +100,24 @@ RSpec.describe "/dealerships/:id/cars", type: :feature do
 
     it 'should have a link next to each car to edit its info' do
       visit "/dealerships/#{@dealership_1.id}/cars"
-      expect(page).to have_link("Click to edit #{@car_1.make} #{@car_1.model}.")
-      click_link "Click to edit #{@car_1.make} #{@car_1.model}."
-      expect(current_url).to eq("http://www.example.com/cars/#{@car_1.id}/edit")
+      expect(page).to have_link("Edit #{@car_1.make} #{@car_1.model}.")
+      click_link "Edit #{@car_1.make} #{@car_1.model}."
+      expect(current_path).to eq("/cars/#{@car_1.id}/edit")
 
       visit "/dealerships/#{@dealership_1.id}/cars"
-      expect(page).to have_link("Click to edit #{@car_4.make} #{@car_4.model}.")
-      click_link "Click to edit #{@car_4.make} #{@car_4.model}."
-      expect(current_url).to eq("http://www.example.com/cars/#{@car_4.id}/edit")
+      expect(page).to have_link("Edit #{@car_4.make} #{@car_4.model}.")
+      click_link "Edit #{@car_4.make} #{@car_4.model}."
+      expect(current_path).to eq("/cars/#{@car_4.id}/edit")
 
       visit "/dealerships/#{@dealership_2.id}/cars"
-      expect(page).to have_link("Click to edit #{@car_2.make} #{@car_2.model}.")
-      click_link "Click to edit #{@car_2.make} #{@car_2.model}."
-      expect(current_url).to eq("http://www.example.com/cars/#{@car_2.id}/edit")
+      expect(page).to have_link("Edit #{@car_2.make} #{@car_2.model}.")
+      click_link "Edit #{@car_2.make} #{@car_2.model}."
+      expect(current_path).to eq("/cars/#{@car_2.id}/edit")
 
       visit "/dealerships/#{@dealership_2.id}/cars"
-      expect(page).to have_link("Click to edit #{@car_6.make} #{@car_6.model}.")
-      click_link "Click to edit #{@car_6.make} #{@car_6.model}."
-      expect(current_url).to eq("http://www.example.com/cars/#{@car_6.id}/edit")
+      expect(page).to have_link("Edit #{@car_6.make} #{@car_6.model}.")
+      click_link "Edit #{@car_6.make} #{@car_6.model}."
+      expect(current_path).to eq("/cars/#{@car_6.id}/edit")
     end
 
     it 'has a form that allows me to only see cars over a mileage I specify' do
@@ -129,8 +129,10 @@ RSpec.describe "/dealerships/:id/cars", type: :feature do
       click_button('Filter')
 
       expect(current_path).to eq("/dealerships/#{@dealership_1.id}/cars")
+      expect(page).to have_content(@car_4.make)
       expect(page).to have_content(@car_4.model)
       expect(page).to have_content(@car_4.mileage)
+      expect(page).to have_content(@car_7.make)
       expect(page).to have_content(@car_7.model)
       expect(page).to have_content(@car_7.mileage)
       expect(page).to have_no_content(@car_1.model)
