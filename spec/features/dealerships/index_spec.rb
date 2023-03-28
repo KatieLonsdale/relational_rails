@@ -26,15 +26,15 @@ RSpec.describe "/dealerships", type: :feature do
     end
 
     it 'should have a link to the cars index at the top' do
-      expect(page).to have_link("Click here to view all cars.")
-      click_link("Click here to view all cars.")
+      expect(page).to have_link("View all cars.")
+      click_link("View all cars.")
 
       expect(current_url).to eq("http://www.example.com/cars")
     end
 
     it 'should have a link to the dealerships index at the top' do
-      expect(page).to have_link("Click here to view all dealerships.")
-      click_link "Click here to view all dealerships."
+      expect(page).to have_link("View all dealerships.")
+      click_link "View all dealerships."
 
       expect(current_url).to eq("http://www.example.com/dealerships")
     end
@@ -47,18 +47,18 @@ RSpec.describe "/dealerships", type: :feature do
     end
 
     it 'should have a link next to each dealership to edit its info' do
-        expect(page).to have_link("Click to edit #{@dealership_1.name}.")
-        click_link "Click to edit #{@dealership_1.name}."
+        expect(page).to have_link("Edit #{@dealership_1.name}.")
+        click_link "Edit #{@dealership_1.name}."
         expect(current_url).to eq("http://www.example.com/dealerships/#{@dealership_1.id}/edit")
 
         visit "/dealerships"
-        expect(page).to have_link("Click to edit #{@dealership_2.name}.")
-        click_link "Click to edit #{@dealership_2.name}."
+        expect(page).to have_link("Edit #{@dealership_2.name}.")
+        click_link "Edit #{@dealership_2.name}."
         expect(current_url).to eq("http://www.example.com/dealerships/#{@dealership_2.id}/edit")
 
         visit "/dealerships"
-        expect(page).to have_link("Click to edit #{@dealership_3.name}.")
-        click_link "Click to edit #{@dealership_3.name}."
+        expect(page).to have_link("Edit #{@dealership_3.name}.")
+        click_link "Edit #{@dealership_3.name}."
         expect(current_url).to eq("http://www.example.com/dealerships/#{@dealership_3.id}/edit")
     end
 
