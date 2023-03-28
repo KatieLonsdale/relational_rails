@@ -17,25 +17,19 @@ RSpec.describe Car, type: :model do
 
     describe '::cars_with_awd' do
       it 'returns an array of cars with awd' do
-        results = Car.cars_with_awd
-        expected = [@car_2, @car_4, @car_5]
-        assert_equal(results, expected)
+        expect(Car.cars_with_awd).to eq([@car_2, @car_4, @car_5])
       end
     end
 
     describe '::sort_alphabetically' do
       it 'returns an array of cars sorted by alphabetical order' do
-        results = Car.sort_alphabetically
-        expected = [@car_5,@car_2,@car_3,@car_1,@car_4]
-        assert_equal(results, expected)
+        expect(Car.sort_alphabetically).to eq([@car_5,@car_2,@car_3,@car_1,@car_4])
       end
     end
     
     describe '::filter_by_mileage' do
       it 'returns an array of cars that are above given mileage' do
-        results = Car.filter_by_mileage("80,000")
-        expected = [@car_3, @car_4]
-        assert_equal(results, expected)
+        expect(Car.filter_by_mileage("80,000")).to eq([@car_3, @car_4])
       end
     end
   end

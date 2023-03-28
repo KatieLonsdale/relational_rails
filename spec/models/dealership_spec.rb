@@ -40,33 +40,21 @@ RSpec.describe Dealership, type: :model do
     describe '#list_cars' do
       it 'returns alphabetical list of cars if query specifies' do
         params = {sort: "alphabetically"}
-        results = @dealership_1.list_cars(params)
-        expected = [@car_1,@car_4]
-        assert_equal(results, expected)
 
-        results = @dealership_2.list_cars(params)
-        expected = [@car_5,@car_2,@car_3]
-        assert_equal(results, expected)
+        expect(@dealership_1.list_cars(params)).to eq([@car_1,@car_4])
+        expect(@dealership_2.list_cars(params)).to eq([@car_5,@car_2,@car_3])
       end
       it 'returns filtered list of cars based on specified mileage' do
         params = {commit: "Filter", mileage: "65,000"}
-        results = @dealership_1.list_cars(params)
-        expected = [@car_4]
-        assert_equal(results, expected)
 
-        results = @dealership_2.list_cars(params)
-        expected = [@car_3,@car_5]
-        assert_equal(results, expected)
+        expect(@dealership_1.list_cars(params)).to eq([@car_4])
+        expect(@dealership_2.list_cars(params)).to eq([@car_3,@car_5])
       end
       it 'returns list of cars without query' do
-        params = {blank: "blank"}
-        results = @dealership_1.list_cars(params)
-        expected = [@car_1,@car_4]
-        assert_equal(results, expected)
+        params = {}
 
-        results = @dealership_2.list_cars(params)
-        expected = [@car_2,@car_3,@car_5]
-        assert_equal(results, expected)
+        expect(@dealership_1.list_cars(params)).to eq([@car_1,@car_4])
+        expect(@dealership_2.list_cars(params)).to eq([@car_2,@car_3,@car_5])
       end
     end
   end
