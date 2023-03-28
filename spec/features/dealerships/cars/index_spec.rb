@@ -13,7 +13,7 @@ RSpec.describe "/dealerships/:id/cars", type: :feature do
       @car_6 = Car.create!(make: 'Jeep', model: 'Grand Cherokee', awd: true, mileage: 20431, dealership_id: @dealership_2.id)
       @car_7 = Car.create!(make: 'Ford', model: 'Bronco', awd: true, mileage: 204393, dealership_id: @dealership_1.id)
     end
-    it "should display the cars that belong to dealership with that id and their attriburtes" do
+    it "should display the cars that belong to dealership with that id and their attributes" do
       visit "/dealerships/#{@dealership_1.id}/cars"
 
       expect(page).to have_content(@car_1.make)
@@ -129,8 +129,10 @@ RSpec.describe "/dealerships/:id/cars", type: :feature do
       click_button('Filter')
 
       expect(current_path).to eq("/dealerships/#{@dealership_1.id}/cars")
+      expect(page).to have_content(@car_4.make)
       expect(page).to have_content(@car_4.model)
       expect(page).to have_content(@car_4.mileage)
+      expect(page).to have_content(@car_7.make)
       expect(page).to have_content(@car_7.model)
       expect(page).to have_content(@car_7.mileage)
       expect(page).to have_no_content(@car_1.model)

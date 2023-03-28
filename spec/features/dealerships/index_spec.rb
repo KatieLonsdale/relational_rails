@@ -80,7 +80,7 @@ RSpec.describe "/dealerships", type: :feature do
     end
     
     it 'deletes cars when their parent dealership is deleted' do
-      @car_1 = Car.create!(make: 'Toyota', model: 'Corolla', awd: false, mileage: 30200, dealership_id: @dealership_1.id)
+      @car_1 = Car.create!(make: 'Toyota', model: 'Corolla', awd: true, mileage: 30200, dealership_id: @dealership_1.id)
       @car_2 = Car.create!(make: 'Nissan', model: 'Rogue', awd: true, mileage: 46414, dealership_id: @dealership_1.id)
       @car_3 = Car.create!(make: 'Porsche', model: '911', awd: true, mileage: 160234, dealership_id: @dealership_2.id)
       click_link "Delete #{@dealership_1.name}."
