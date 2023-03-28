@@ -30,14 +30,14 @@ RSpec.describe "/cars", type: :feature do
       expect(page).to have_link("View all cars.")
       click_link "View all cars."
 
-      expect(current_url).to eq("http://www.example.com/cars")
+      expect(current_path).to eq("/cars")
     end
 
     it 'should have a link to the dealerships index at the top' do
       expect(page).to have_link("View all dealerships.")
       click_link "View all dealerships."
 
-      expect(current_url).to eq("http://www.example.com/dealerships")
+      expect(current_path).to eq("/dealerships")
     end
 
     it 'should only show cars with awd' do
@@ -66,12 +66,12 @@ RSpec.describe "/cars", type: :feature do
       visit "/cars"
       expect(page).to have_link("Edit #{@car_2.make} #{@car_2.model}.")
       click_link "Edit #{@car_2.make} #{@car_2.model}."
-      expect(current_url).to eq("http://www.example.com/cars/#{@car_2.id}/edit")
+      expect(current_path).to eq("/cars/#{@car_2.id}/edit")
 
       visit "/cars"
       expect(page).to have_link("Edit #{@car_4.make} #{@car_4.model}.")
       click_link "Edit #{@car_4.make} #{@car_4.model}."
-      expect(current_url).to eq("http://www.example.com/cars/#{@car_4.id}/edit")
+      expect(current_path).to eq("/cars/#{@car_4.id}/edit")
     end
 
     it 'should have a link next to each car to delete its info' do

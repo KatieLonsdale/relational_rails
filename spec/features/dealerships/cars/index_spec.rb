@@ -55,7 +55,7 @@ RSpec.describe "/dealerships/:id/cars", type: :feature do
       expect(page).to have_link("View all cars.")
       click_link "View all cars."
 
-      expect(current_url).to eq("http://www.example.com/cars")
+      expect(current_path).to eq("/cars")
     end
 
     it 'should have a link to the dealerships index at the top' do
@@ -64,7 +64,7 @@ RSpec.describe "/dealerships/:id/cars", type: :feature do
       expect(page).to have_link("View all dealerships.")
       click_link "View all dealerships."
 
-      expect(current_url).to eq("http://www.example.com/dealerships")
+      expect(current_path).to eq("/dealerships")
     end
 
     it 'should have a link to add a new car for that dealership' do
@@ -72,7 +72,7 @@ RSpec.describe "/dealerships/:id/cars", type: :feature do
       expect(page).to have_link("Add a new car.")
       click_link "Add a new car."
 
-      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealership_1.id}/cars/new")
+      expect(current_path).to eq("/dealerships/#{@dealership_1.id}/cars/new")
     end
 
     it 'should have a link to sort cars in alphabetical order' do
@@ -102,22 +102,22 @@ RSpec.describe "/dealerships/:id/cars", type: :feature do
       visit "/dealerships/#{@dealership_1.id}/cars"
       expect(page).to have_link("Edit #{@car_1.make} #{@car_1.model}.")
       click_link "Edit #{@car_1.make} #{@car_1.model}."
-      expect(current_url).to eq("http://www.example.com/cars/#{@car_1.id}/edit")
+      expect(current_path).to eq("/cars/#{@car_1.id}/edit")
 
       visit "/dealerships/#{@dealership_1.id}/cars"
       expect(page).to have_link("Edit #{@car_4.make} #{@car_4.model}.")
       click_link "Edit #{@car_4.make} #{@car_4.model}."
-      expect(current_url).to eq("http://www.example.com/cars/#{@car_4.id}/edit")
+      expect(current_path).to eq("/cars/#{@car_4.id}/edit")
 
       visit "/dealerships/#{@dealership_2.id}/cars"
       expect(page).to have_link("Edit #{@car_2.make} #{@car_2.model}.")
       click_link "Edit #{@car_2.make} #{@car_2.model}."
-      expect(current_url).to eq("http://www.example.com/cars/#{@car_2.id}/edit")
+      expect(current_path).to eq("/cars/#{@car_2.id}/edit")
 
       visit "/dealerships/#{@dealership_2.id}/cars"
       expect(page).to have_link("Edit #{@car_6.make} #{@car_6.model}.")
       click_link "Edit #{@car_6.make} #{@car_6.model}."
-      expect(current_url).to eq("http://www.example.com/cars/#{@car_6.id}/edit")
+      expect(current_path).to eq("/cars/#{@car_6.id}/edit")
     end
 
     it 'has a form that allows me to only see cars over a mileage I specify' do
