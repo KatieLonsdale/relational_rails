@@ -31,8 +31,8 @@ RSpec.describe "/dealership/:id", type: :feature do
     it 'should have a link to the child index at the top' do
       visit "/dealerships/#{@dealership_1.id}"
 
-      expect(page).to have_link("Click here to view all cars.")
-      click_link("Click here to view all cars.")
+      expect(page).to have_link("View all cars.")
+      click_link("View all cars.")
 
       expect(current_url).to eq("http://www.example.com/cars")
     end
@@ -40,21 +40,21 @@ RSpec.describe "/dealership/:id", type: :feature do
     it 'should have a link to the dealerships index at the top' do
       visit "/dealerships/#{@dealership_1.id}"
 
-      expect(page).to have_link("Click here to view all dealerships.")
-      click_link "Click here to view all dealerships."
+      expect(page).to have_link("View all dealerships.")
+      click_link "View all dealerships."
 
       expect(current_url).to eq("http://www.example.com/dealerships")
     end
 
     it 'should have a link to the index of cars that belong to dealership' do
       visit "/dealerships/#{@dealership_1.id}"
-      expect(page).to have_link("Click here to view this dealership's inventory.")
-      click_link "Click here to view this dealership's inventory."
+      expect(page).to have_link("View this dealership's inventory.")
+      click_link "View this dealership's inventory."
       expect(current_url).to eq("http://www.example.com/dealerships/#{@dealership_1.id}/cars")
 
       visit "/dealerships/#{@dealership_2.id}"
-      expect(page).to have_link("Click here to view this dealership's inventory.")
-      click_link "Click here to view this dealership's inventory."
+      expect(page).to have_link("View this dealership's inventory.")
+      click_link "View this dealership's inventory."
       expect(current_url).to eq("http://www.example.com/dealerships/#{@dealership_2.id}/cars")
     end
 
